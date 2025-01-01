@@ -19,32 +19,24 @@ const projects = [
     image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
     type: "landscape",
     category: "Corporate",
-    likes: 987,
-    comments: 45,
   },
   {
     title: "Brand Story",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
     type: "portrait",
     category: "Branding",
-    likes: 3456,
-    comments: 234,
   },
   {
     title: "Product Launch",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
     type: "landscape",
     category: "Commercial",
-    likes: 1789,
-    comments: 123,
   },
   {
     title: "Music Video",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
     type: "portrait",
     category: "Entertainment",
-    likes: 4567,
-    comments: 345,
   },
 ];
 
@@ -83,7 +75,7 @@ export const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="section-container">
+    <section id="projects" className="section-container overflow-hidden">
       <div className="text-center mb-16">
         <motion.span 
           initial={{ opacity: 0 }}
@@ -117,7 +109,7 @@ export const Projects = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex-none w-[600px] aspect-video relative group"
+                className="flex-none w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] aspect-video relative group"
               >
                 <img
                   src={project.image}
@@ -125,7 +117,7 @@ export const Projects = () => {
                   className="w-full h-full object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
+                  <div className="text-center p-4">
                     <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                     <span className="text-white/80 text-sm">{project.category}</span>
                   </div>
@@ -148,7 +140,7 @@ export const Projects = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex-none w-[400px] aspect-[9/16] relative group"
+                className="flex-none w-[60vw] sm:w-[45vw] md:w-[35vw] lg:w-[25vw] aspect-[9/16] relative group"
               >
                 <img
                   src={project.image}
@@ -156,7 +148,7 @@ export const Projects = () => {
                   className="w-full h-full object-cover rounded-lg"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
+                  <div className="text-center p-4">
                     <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                     <span className="text-white/80 text-sm">{project.category}</span>
                   </div>
