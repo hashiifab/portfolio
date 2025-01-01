@@ -4,37 +4,37 @@ import { useRef, useEffect } from "react";
 const projects = [
   {
     title: "Urban Documentary",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    videoUrl: "https://www.youtube.com/embed/o95T2Yeh_1I?autoplay=1&mute=1&loop=1&playlist=o95T2Yeh_1I", // Video YouTube untuk landscape
     type: "landscape",
     category: "Documentary",
   },
   {
     title: "Fashion Campaign",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    videoUrl: "https://www.youtube.com/embed/loTvyRY1Ds4?autoplay=1&mute=1&loop=1&playlist=loTvyRY1Ds4", // Video YouTube Shorts untuk portrait
     type: "portrait",
     category: "Commercial",
   },
   {
     title: "Tech Showcase",
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+    videoUrl: "https://www.youtube.com/embed/o95T2Yeh_1I?autoplay=1&mute=1&loop=1&playlist=o95T2Yeh_1I", // Video YouTube untuk landscape
     type: "landscape",
     category: "Corporate",
   },
   {
     title: "Brand Story",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    videoUrl: "https://www.youtube.com/embed/loTvyRY1Ds4?autoplay=1&mute=1&loop=1&playlist=loTvyRY1Ds4", // Video YouTube Shorts untuk portrait
     type: "portrait",
     category: "Branding",
   },
   {
     title: "Product Launch",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
+    videoUrl: "https://www.youtube.com/embed/o95T2Yeh_1I?autoplay=1&mute=1&loop=1&playlist=o95T2Yeh_1I", // Video YouTube untuk landscape
     type: "landscape",
     category: "Commercial",
   },
   {
     title: "Music Video",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    videoUrl: "https://www.youtube.com/embed/loTvyRY1Ds4?autoplay=1&mute=1&loop=1&playlist=loTvyRY1Ds4", // Video YouTube Shorts untuk portrait
     type: "portrait",
     category: "Entertainment",
   },
@@ -111,10 +111,11 @@ export const Projects = () => {
                 viewport={{ once: true }}
                 className="flex-none w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] aspect-video relative group"
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
+                <iframe
+                  src={project.videoUrl}
+                  allow="autoplay; fullscreen"
                   className="w-full h-full object-cover rounded-lg"
+                  frameBorder="0"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                   <div className="text-center p-4">
@@ -142,10 +143,11 @@ export const Projects = () => {
                 viewport={{ once: true }}
                 className="flex-none w-[60vw] sm:w-[45vw] md:w-[35vw] lg:w-[25vw] aspect-[9/16] relative group"
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
+                <iframe
+                  src={project.videoUrl}
+                  allow="autoplay; fullscreen"
                   className="w-full h-full object-cover rounded-lg"
+                  frameBorder="0"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                   <div className="text-center p-4">

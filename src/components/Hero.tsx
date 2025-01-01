@@ -3,18 +3,25 @@ import { ChevronDown } from "lucide-react";
 
 export const Hero = () => {
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Abstract background patterns */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-      
+      {/* Video background hanya untuk perangkat besar */}
+      <motion.div 
+        className="absolute inset-0 hidden sm:block" // Menyembunyikan video pada perangkat kecil
+        style={{ zIndex: -1 }}
+      >
+        <iframe 
+          src="https://www.youtube.com/embed/P54QwJt4dC8?autoplay=1&mute=1&loop=1&playlist=P54QwJt4dC8" 
+          allow="autoplay; fullscreen" 
+          className="w-full h-full"
+          frameBorder="0"
+        />
+      </motion.div>
+
       <div className="section-container relative z-10">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -22,28 +29,28 @@ export const Hero = () => {
           transition={{ delay: 0.2 }}
           className="text-center max-w-4xl mx-auto"
         >
-          <motion.h1 
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
             className="text-6xl md:text-8xl font-display font-bold mb-6"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-accent">
-              Visual
+              I am
             </span>
             <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent via-primary to-primary/80">
-              Storyteller
+              a Video Editor
             </span>
           </motion.h1>
           
-          <motion.p 
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
             className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Crafting compelling narratives through the art of video editing
+            Hey, gue Faiz! Gue di sini buat bantuin lo bikin video yang keren dan bikin orang ketawa. Kalau lo punya ide gila, gue yang siap mewujudkan itu!
           </motion.p>
           
           <motion.div
@@ -56,13 +63,13 @@ export const Hero = () => {
               href="#projects" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-medium transition-colors"
             >
-              View Projects
+              Lihat Proyek
             </a>
             <a 
               href="#contact" 
               className="bg-secondary hover:bg-secondary/80 text-secondary-foreground px-8 py-4 rounded-full font-medium transition-colors"
             >
-              Contact Me
+              Hubungi Gue
             </a>
           </motion.div>
         </motion.div>

@@ -17,22 +17,22 @@ export const Contact = () => {
         </h2>
         <div className="space-y-6">
           <a
-            href="mailto:contact@example.com"
+            href="mailto:ngakak@emil.com"
             className="flex items-center justify-center space-x-3 text-lg hover:text-primary transition-colors"
           >
             <Mail className="w-6 h-6" />
-            <span>contact@example.com</span>
+            <span>ngakak@emil.com</span>
           </a>
           <a
-            href="tel:+1234567890"
+            href="tel:+6281234567890"
             className="flex items-center justify-center space-x-3 text-lg hover:text-primary transition-colors"
           >
             <Phone className="w-6 h-6" />
-            <span>+1 (234) 567-890</span>
+            <span>+62 812-3456-7890</span>
           </a>
           <div className="flex items-center justify-center space-x-3 text-lg">
             <MapPin className="w-6 h-6" />
-            <span>Los Angeles, CA</span>
+            <span>Jl. Fantasi No. 123, Kota Imut, ID</span>
           </div>
         </div>
       </motion.div>
