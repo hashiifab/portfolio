@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 const projects = [
   {
@@ -6,16 +7,12 @@ const projects = [
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
     type: "landscape",
     category: "Documentary",
-    likes: 1234,
-    comments: 89,
   },
   {
     title: "Fashion Campaign",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
     type: "portrait",
     category: "Commercial",
-    likes: 2567,
-    comments: 156,
   },
   {
     title: "Tech Showcase",
@@ -51,7 +48,40 @@ const projects = [
   },
 ];
 
+const landscapeProjects = projects.filter(p => p.type === "landscape");
+const portraitProjects = projects.filter(p => p.type === "portrait");
+
 export const Projects = () => {
+  const landscapeRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const landscapeScroll = setInterval(() => {
+      if (landscapeRef.current) {
+        if (landscapeRef.current.scrollLeft + landscapeRef.current.offsetWidth >= landscapeRef.current.scrollWidth) {
+          landscapeRef.current.scrollLeft = 0;
+        } else {
+          landscapeRef.current.scrollLeft += 1;
+        }
+      }
+    }, 20);
+
+    const portraitScroll = setInterval(() => {
+      if (portraitRef.current) {
+        if (portraitRef.current.scrollLeft + portraitRef.current.offsetWidth >= portraitRef.current.scrollWidth) {
+          portraitRef.current.scrollLeft = 0;
+        } else {
+          portraitRef.current.scrollLeft += 1;
+        }
+      }
+    }, 20);
+
+    return () => {
+      clearInterval(landscapeScroll);
+      clearInterval(portraitScroll);
+    };
+  }, []);
+
   return (
     <section id="projects" className="section-container">
       <div className="text-center mb-16">
@@ -67,57 +97,75 @@ export const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl md:text-5xl font-display font-bold mt-2"
+          className="text-4xl font-display font-bold mt-2"
         >
           Project Gallery
         </motion.h2>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 max-w-6xl mx-auto"
-      >
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="relative aspect-square overflow-hidden bg-black/20"
+
+      <div className="space-y-12">
+        <div>
+          <h3 className="text-xl font-medium mb-6 text-muted-foreground">Landscape Projects</h3>
+          <div 
+            ref={landscapeRef}
+            className="flex overflow-x-hidden space-x-4 pb-4"
           >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
-              <h3 className="text-xl font-bold text-white mb-2">
-                {project.title}
-              </h3>
-              <div className="flex items-center space-x-6 text-white">
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                  </svg>
-                  {project.likes.toLocaleString()}
+            {[...landscapeProjects, ...landscapeProjects].map((project, index) => (
+              <motion.div
+                key={`${project.title}-${index}`}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex-none w-[600px] aspect-video relative group"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                    <span className="text-white/80 text-sm">{project.category}</span>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
-                  </svg>
-                  {project.comments.toLocaleString()}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-xl font-medium mb-6 text-muted-foreground">Portrait Projects</h3>
+          <div 
+            ref={portraitRef}
+            className="flex overflow-x-hidden space-x-4 pb-4"
+          >
+            {[...portraitProjects, ...portraitProjects].map((project, index) => (
+              <motion.div
+                key={`${project.title}-${index}`}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex-none w-[400px] aspect-[9/16] relative group"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                    <span className="text-white/80 text-sm">{project.category}</span>
+                  </div>
                 </div>
-              </div>
-              <span className="mt-2 text-sm text-white/80">
-                {project.category}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
